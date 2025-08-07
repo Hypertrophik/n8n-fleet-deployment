@@ -4,4 +4,4 @@ targets:
 - name: "local"
   clusterSelector:
     matchLabels:
-      management.cattle.io/cluster-display-name: "local"
+      provider.cattle.io: "k3s"
