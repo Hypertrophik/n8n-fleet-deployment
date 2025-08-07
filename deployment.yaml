@@ -1,8 +1,8 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: n8n
-  namespace: n8n
 spec:
   replicas: 1
   selector:
@@ -32,15 +32,3 @@ spec:
       - name: n8n-data
         persistentVolumeClaim:
           claimName: n8n-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: n8n-pvc
-  namespace: n8n
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
