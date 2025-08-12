@@ -16,6 +16,7 @@ spec:
       containers:
       - name: n8n
         image: n8nio/n8n:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5678
         env:
