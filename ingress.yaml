@@ -5,7 +5,9 @@ metadata:
   name: n8n-ingress
   annotations:
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure, web
+    traefik.ingress.kubernetes.io/router.middlewares: n8n-redirect-to-https@kubernetescrd
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
   - host: work-n8n.stefenallen.com
@@ -18,3 +20,7 @@ spec:
             name: n8n-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - work-n8n.stefenallen.com
+    secretName: n8n-tls-cert
