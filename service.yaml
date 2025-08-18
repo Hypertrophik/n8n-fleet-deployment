@@ -1,26 +1,14 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: n8n-ingress
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure, web
-    traefik.ingress.kubernetes.io/router.middlewares: n8n-redirect-to-https@kubernetescrd
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: n8n-nodeport
+  namespace: n8n
 spec:
-  rules:
-  - host: work-n8n.stefenallen.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: n8n-service
-            port:
-              number: 80
-  tls:
-  - hosts:
-    - work-n8n.stefenallen.com
-    secretName: n8n-tls-cert
+  type: ClusterIP
+  selector:
+    app: n8n
+  ports:
+  - port: 80
+    targetPort: 5678
+    protocol: TCP
