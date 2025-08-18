@@ -8,7 +8,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: n8n.10.124.145.8.sslip.io
+  - host: work-n8n.stefenallen.com
     http:
       paths:
       - path: /
